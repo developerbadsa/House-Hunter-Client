@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+      const goto = useNavigate()
 
 
       const HandleRegister = (e) => {
@@ -24,12 +27,17 @@ const Register = () => {
                   name, role, email, phone, password
             }
 
-            axios.post('http://localhost:3000/users', {
-                  userRegisterData
-            })
+            axios.post('http://localhost:3000/users', userRegisterData)
                   .then((res) => {
-                        resetForm()
-                        console.log(res.data)
+                       console.log(res.data)
+                        if(res.data.acknowledged){
+                              resetForm()
+                              toast("Wow Account Created Successfully")
+                              goto('/')
+                              return
+                        }else{
+                              toast(res.data.message)
+                        }
                   })
                   .catch(err => {
                         console.log(err)
@@ -42,6 +50,7 @@ const Register = () => {
       return (
             <section className="h-96 lg:h-screen font-poppins ">
                   <div className="relative z-10 flex justify-center h-screen py-7 lg:py-16 dark:bg-gray-800 2xl:py-44">
+                  <ToastContainer />
                         <div className="absolute top-0 bottom-0 left-0 w-full h-full bg-gray-50 dark:bg-gray-900 lg:bottom-0 lg:h-auto lg:w-full">
                               <div className="absolute inset-0 lg:bg-[#00000066] " />
                               <img

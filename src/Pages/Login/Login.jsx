@@ -1,6 +1,42 @@
+import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+      const goto = useNavigate()
+
+      const handleLogin = (e)=>{
+            e.preventDefault()
+            const email = e.target.email.value
+            const password = e.target.password.value
+
+            const loginData = {
+                   email, password
+            }
+
+            console.log(loginData)
+
+            axios.get(`http://localhost:3000/users?email=${email}&password=${password}`, {data: loginData})
+            .then((res) => {
+                 console.log(res.data)
+                  if(res.data){
+                        toast("Wow Account Logged Successfully")
+                        goto('/')
+                        return
+                  }else{
+                        toast('login problem')
+                  }
+            })
+            .catch(err => {
+                  console.log(err)
+                  toast('login problem')
+            })
+
+      }
+
+
       return (
             <section className="h-96 lg:h-screen font-poppins ">
                   <div className="relative z-10 flex justify-center h-screen py-7 lg:py-16 dark:bg-gray-800 2xl:py-44">
@@ -12,6 +48,7 @@ const Login = () => {
                                     className="hidden object-cover w-full h-full lg:block"
                               />
                         </div>
+                        <ToastContainer />
                         <div className="flex items-center justify-center">
                               <div className="relative max-w-6xl px-4 mx-auto">
                                     <div className="max-w-xl mx-auto lg:max-w-5xl">
@@ -29,7 +66,7 @@ const Login = () => {
                                                             <h2 className="mb-4 text-xl font-bold lg:mb-8 lg:text-3xl dark:text-gray-400">
                                                                   Login our account
                                                             </h2>
-                                                            <form action="" className="p-0 m-0">
+                                                            <form onSubmit={handleLogin} className="p-0 m-0">
                                                                   <div>
                                                                         <label
                                                                               htmlFor=""
@@ -40,7 +77,7 @@ const Login = () => {
                                                                         <input
                                                                               type="email"
                                                                               className="w-full px-4 py-3 mt-3 bg-gray-200 rounded-lg dark:text-gray-400 dark:bg-gray-800 "
-                                                                              name=""
+                                                                              name="email"
                                                                               placeholder="Enter your email"
                                                                         />
                                                                   </div>
@@ -56,7 +93,7 @@ const Login = () => {
                                                                                     <input
                                                                                           type="password"
                                                                                           className="w-full px-4 py-3 bg-gray-200 rounded-lg dark:text-gray-400 dark:bg-gray-800 "
-                                                                                          name=""
+                                                                                          name="password"
                                                                                           placeholder="Enter password"
                                                                                     />
                                                                                     <svg
