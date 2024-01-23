@@ -48,8 +48,8 @@ const Register = () => {
 
 
       return (
-            <section className="h-96 lg:h-screen font-poppins ">
-                  <div className="relative z-10 flex justify-center h-screen py-7 lg:py-16 dark:bg-gray-800 2xl:py-44">
+            <section className=" bg-red-400">
+                  <div className="relative  flex justify-center py-7 lg:py-16 dark:bg-gray-800 2xl:py-44">
                   <ToastContainer />
                         <div className="absolute top-0 bottom-0 left-0 w-full h-full bg-gray-50 dark:bg-gray-900 lg:bottom-0 lg:h-auto lg:w-full">
                               <div className="absolute inset-0 lg:bg-[#00000066] " />
@@ -60,23 +60,16 @@ const Register = () => {
                               />
                         </div>
                         <div className="flex items-center justify-center">
-                              <div className="relative max-w-6xl px-4 mx-auto">
-                                    <div className="max-w-xl mx-auto lg:max-w-5xl">
+                              <div className="relative max-w-6xl px-4 mx-auto border">
+                                    <div className="max-w-xl mx-auto lg:max-w-5xl border">
                                           <div className="flex flex-wrap items-center -mx-4">
-                                                <div className="hidden w-full px-6 mb-16 lg:w-3/5 lg:mb-0 lg:block">
-                                                      <h2 className="text-4xl font-bold leading-loose text-left text-gray-100 dark:text-gray-300 mb-9 lg:text-6xl ">
-                                                            Welcome and join our community
-                                                      </h2>
-                                                      <p className="text-lg text-left text-gray-200 dark:text-gray-300 ">
-                                                            You are welcome here!
-                                                      </p>
-                                                </div>
-                                                <div className="w-full px-4 lg:w-full">
-                                                      <div className="p-6 shadow-md lg:p-9 bg-gray-50 dark:bg-gray-900">
+                                             
+                                                <div className="w-full px-4 lg:w-full border">
+                                                      <div className="p-6 shadow-md lg:p-9 bg-gray-50 dark:bg-gray-900 w-full">
                                                             <h2 className="mb-4 text-xl font-bold lg:mb-8 lg:text-3xl dark:text-gray-400">
                                                                   Register our account
                                                             </h2>
-                                                            <form onSubmit={HandleRegister} className="p-0 m-0">
+                                                            <form onSubmit={HandleRegister} className="p-0 m-0 ">
                                                                   {/* Name */}
                                                                   <div>
                                                                         <label
