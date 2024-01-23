@@ -7,6 +7,7 @@ import Home from './Pages/Home/Home'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
+import HouseDetails from './Pages/Home/Sections/Houses/HouseDetails'
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
       {
         path:'/register',
         element: <Register></Register>
+      },
+      {
+        path: '/HouseDetails/:id',
+        element: <HouseDetails></HouseDetails>,
+        // loader: `http://localhost:3000/rooms?id=${id}`
       }
     ]
   }

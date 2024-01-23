@@ -7,7 +7,6 @@ const MainLayout = () => {
             <div>
                   <NavBar></NavBar>
                   <Outlet></Outlet>
-                  footer
             </div>
       );
 };

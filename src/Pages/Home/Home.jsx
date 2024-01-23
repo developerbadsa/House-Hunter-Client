@@ -1,4 +1,4 @@
-import Houses from "./Sections/Houses";
+import Houses from "./Sections/Houses/Houses";
 
 
 const Home = () => {
