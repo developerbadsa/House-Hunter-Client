@@ -1,9 +1,8 @@
-import React from 'react';
 
 const Home = () => {
       return (
-            <div>
-                  Home page
+            <div className='text-3xl bg-red-600'>
+                  <span className="text-orange-600">Home page</span>
             </div>
       );
 };
