@@ -1,23 +1,41 @@
+import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
 
 
-      const HandleRegister = (e)=>{
+      const HandleRegister = (e) => {
             e.preventDefault()
-            const name = e.target.name.value
-            const role = e.target.role.value
-            const email = e.target.email.value
-            const phone = e.target.phone.value
-            const password = e.target.password.value
+            var name = e.target.name.value
+            var role = e.target.role.value
+            var email = e.target.email.value
+            var phone = e.target.phone.value
+            var password = e.target.password.value
+            const resetForm = () => {
+                  e.target.name.value = ''
+                  e.target.role.value = ''
+                  e.target.email.value = ''
+                  e.target.phone.value = ''
+                  e.target.password.value = ''
+            }
 
             const userRegisterData = {
                   name, role, email, phone, password
             }
 
+            axios.post('http://localhost:3000/users', {
+                  userRegisterData
+            })
+                  .then((res) => {
+                        resetForm()
+                        console.log(res.data)
+                  })
+                  .catch(err => {
+                        console.log(err)
+                  })
 
-            console.log( userRegisterData)
+
       }
 
 
@@ -142,14 +160,14 @@ const Register = () => {
                                                                   </div>
                                                                   <button
                                                                         className="w-full px-4 py-3 mt-5 font-semibold text-gray-200 bg-fuchsia-500 rounded-lg dark:bg-fuchsia-500 hover:text-fuchsia-200 "
-                                                                        type="submit" 
+                                                                        type="submit"
                                                                   >
                                                                         Register
                                                                   </button>
                                                                   <div className="flex flex-wrap items-center mt-3 text-sm text-gray-700 lg:text-base lg:mt-5 dark:text-gray-400">
                                                                         Already have an account?
                                                                         <Link
-                                                                             to='/login'
+                                                                              to='/login'
                                                                               className="ml-2 text-base font-semibold text-fuchsia-700 dark:text-fuchsia-300 dark:hover:text-fuchsia-500"
                                                                         >
                                                                               Login
