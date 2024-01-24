@@ -15,7 +15,7 @@ const HouseDetails = () => {
       useEffect(() => {
             const fetchData = async () => {
                   try {
-                        const response = await axios.get(`http://localhost:3000/rooms/${id}`);
+                        const response = await axios.get(`https://house-hunter-server-beta.vercel.app/rooms/${id}`);
                         setHouseDetails(response.data);
                   } catch (error) {
                         setError(error);

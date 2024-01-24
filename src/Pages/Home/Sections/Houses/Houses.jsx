@@ -12,10 +12,9 @@ const Houses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/rooms');
+        const response = await axios.get('https://house-hunter-server-beta.vercel.app/rooms');
         setHouseData(response.data);
 
-        console.log(response);
       } catch (error) {
         console.log(error);
         setError(error);
@@ -29,7 +28,7 @@ const Houses = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner or animation
+    return <div>Loading...</div>; 
   }
 
   if (error) {
@@ -37,7 +36,6 @@ const Houses = () => {
   }
 
 
-  console.log(houseData)
 
   return (
     <section className="flex items-center bg-gray-100 py-16 dark:bg-gray-800 font-poppins">

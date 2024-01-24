@@ -1,38 +1,43 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useUser from '../../Hooks/useUser';
 
 const Login = () => {
       const goto = useNavigate()
+      const [userData, setUserData] = useState(null)
+      const { user, setUserInfo} = useUser(userData)
 
-      const handleLogin = (e)=>{
+
+      // console.log('user from login', userData)
+
+      const handleLogin = (e) => {
             e.preventDefault()
             const email = e.target.email.value
             const password = e.target.password.value
 
             const loginData = {
-                   email, password
+                  email, password
             }
+            // console.log(loginData)
 
-            console.log(loginData)
-
-            axios.get(`http://localhost:3000/users?email=${email}&password=${password}`, {data: loginData})
-            .then((res) => {
-                 console.log(res.data)
-                  if(res.data){
-                        toast("Wow Account Logged Successfully")
-                        goto('/')
-                        return
-                  }else{
-                        toast('login problem')
+            axios.get(`https://house-hunter-server-beta.vercel.app/users?email=${email}&password=${password}`, { data: loginData })
+            .then(async (res) => {
+                  if (res?.data.status) {
+                    localStorage.setItem('token', res?.data.token);
+                    toast("Wow Account Logged Successfully");
+                    setUserData(res?.data); 
+                    goto('/');
+                  } else {
+                    toast(res?.data.message);
                   }
-            })
-            .catch(err => {
-                  console.log(err)
-                  toast('login problem')
-            })
+                })
+                  .catch(err => {
+                        console.log(err)
+                        toast('login Problem')
+                  })
 
       }
 
@@ -128,7 +133,7 @@ const Login = () => {
                                                                   <div className="flex flex-wrap items-center mt-3 text-sm text-gray-700 lg:text-base lg:mt-5 dark:text-gray-400">
                                                                         Need an account?
                                                                         <Link
-                                                                             to={'/register'}
+                                                                              to={'/register'}
                                                                               className="ml-2 text-base font-semibold text-fuchsia-700 dark:text-fuchsia-300 dark:hover:text-fuchsia-500"
                                                                         >
                                                                               Create an account

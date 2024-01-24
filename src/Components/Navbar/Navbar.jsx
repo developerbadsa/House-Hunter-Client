@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useUser from '../../Hooks/useUser';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
+  const {name} = useUser()
+  const goto = useNavigate()
+
+  // console.log(name)
 
   const menuItems = (
     <>
@@ -14,6 +21,22 @@ const NavBar = () => {
       </li>
     </>
   );
+
+  const handleLogout = () => {
+    // Send a logout request to the server
+    axios.get('https://house-hunter-server-beta.vercel.app/logout')
+      .then(() => {
+        // Clear the token from local storage
+        localStorage.removeItem('token');
+        toast('Logout successful');
+        goto('/login');
+      })
+      .catch((err) => {
+        console.error('Logout failed:', err);
+        toast('Logout failed');
+      });
+  };
+
 
   return (
     <section className="font-poppins bg-purple-50 dark:bg-gray-800">
@@ -60,7 +83,8 @@ const NavBar = () => {
           <ul className="hidden lg:w-auto lg:space-x-12 lg:items-center lg:flex">
             {menuItems}
           </ul>
-          <div className="hidden lg:flex">
+
+          <div className="hidden lg:flex ">
             <a
               href=""
               className="inline-block px-4 py-3 mr-4 text-xs font-semibold leading-none text-purple-500 border border-purple-300 rounded dark:hover:text-purple-300 dark:text-gray-400 dark:border-gray-400 hover:text-purple-700 hover:border-purple-500 dark:hover:border-purple-300"
@@ -78,6 +102,9 @@ const NavBar = () => {
                 />
               </svg>
             </a>
+            <div>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
           </div>
         </nav>
         {/* Mobile Sidebar */}

@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: '/HouseDetails/:id',
         element: <HouseDetails></HouseDetails>,
-        // loader: `http://localhost:3000/rooms?id=${id}`
+        // loader: `https://house-hunter-server-beta.vercel.app/rooms?id=${id}`
       }
     ]
   }

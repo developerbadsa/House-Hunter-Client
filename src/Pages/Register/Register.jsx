@@ -27,14 +27,14 @@ const Register = () => {
                   name, role, email, phone, password
             }
 
-            axios.post('http://localhost:3000/users', userRegisterData)
+            axios.post('https://house-hunter-server-beta.vercel.app/users', userRegisterData)
                   .then((res) => {
                        console.log(res.data)
-                        if(res.data.acknowledged){
+                        if(res.data.token){
                               resetForm()
+                              // localStorage.setItem('token', res?.data.token);
                               toast("Wow Account Created Successfully")
-                              goto('/')
-                              return
+                              goto('/login')
                         }else{
                               toast(res.data.message)
                         }
